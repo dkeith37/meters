@@ -1,0 +1,12 @@
+{% extends 'main.html' %}
+{% block content %}
+<br/>
+<div class="alert alert-primary" role="alert">
+    {{ meters|length }}  Meter(s) found --- (Select a Meter Below)
+</div>
+<div class="list-group">
+    {% for meter in meters %}
+    <a href="/meter/{{meter.id}}" class="list-group-item list-group-item-action" hx-get="/meter/{{meter.id}}" hx-target="#pushedContent" hx-push-url="true">{{meter.label}}</a>
+    {% endfor %}
+</div>
+{% endblock %}

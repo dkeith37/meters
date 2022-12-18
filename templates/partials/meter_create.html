@@ -1,0 +1,7 @@
+<form method="POST" action="/meters/create" autocomplete="off">
+    <div class="input-group mb-3">
+        <span class="input-group-text" id="basic-addon1">Meter Label</span>
+        <input type="text" class="form-control"  name="label" placeholder="Enter Label For Meter" aria-label="Label" aria-describedby="basic-addon1">
+    </div>
+    <button type="submit" class="btn btn-primary mb-3" hx-post="/meters/create" hx-target="#pushedContent" hx-push-url="true">Create Meter</button>
+</form>

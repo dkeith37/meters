@@ -1,0 +1,63 @@
+<div class="card">
+    <h5 class="card-header">Enter Meter Data</h5>
+    <div class="card-body">
+        <div class="card-text">
+            <form method="POST" action="/meter/{{meter.id}}/data/create" autocomplete="off">
+                <div class="input-group mb-3">
+                    <span class="input-group-text" id="basic-addon1">Meter Data Value</span>
+                    <input type="text" class="form-control" id="meterDataValue" name="value" placeholder="Consumption Value" aria-label="Label" aria-describedby="basic-addon1">
+                    <span class="input-group-text">kW-hr</span>
+                </div>
+                <button
+                    type="submit"
+                    class="btn btn-primary mb-3"
+                    hx-post="/meter/{{meter.id}}/data/create"
+                    hx-target="#meter_data_partial"
+                    hx-transition
+                    hx-push-url="false">Create Meter Data /meter/&lt;int:id&gt;/data/create</button>
+            </form>
+        </div>
+    </div>
+</div>
+<br />
+<div class="card">
+    <h5 class="card-header">Meter Data List</h5>
+    <div class="card-body">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">ID</th>
+                    <th scope="col">Meter ID</th>
+                    <th scope="col">Value</th>
+                    <th scope="col">Time Stamp</th>
+                </tr>
+                </thead>
+                <tbody>
+                    {% for md in meterData %}
+                    <tr>
+                        <th scope="row">{{md.id}}</th>
+                        <td>{{md.meter_id}}</td>
+                        <td>{{md.value}}</td>
+                        <td>{{md.timestamp}}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+    </div>
+</div>
+<br />
+<div class="card">
+    <h5 class="card-header">Meter Data List JSON Result</h5>
+    <div class="card-body">
+        <pre id="meter_data_json"></pre>
+    </div>
+</div>
+
+<script type="text/javascript">
+    var meterDataJson = '{{meterDataJson|tojson|safe}}'
+    ;(function(){
+
+        document.getElementById('meter_data_json').innerHTML = JSON.stringify(JSON.parse(meterDataJson), null, 4)
+
+    })();
+</script>

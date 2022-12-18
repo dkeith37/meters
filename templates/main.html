@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <title>Meters Flask App Rest API</title>
+        <link rel="stylesheet" href="{{ url_for('static', filename='bootstrap.min.css') }}" />
+    </head>
+    <body>
+
+        <nav class="navbar navbar-dark bg-dark">
+            <div class="container-fluid">
+                <span class="navbar-brand mb-0 h1">Meters API</span>
+            </div>
+        </nav>
+
+        <div class="container-fluid">
+            <div class="row align-items-start">
+                <div class="col">
+                    {% include 'partials/accordion.html' %}
+                </div>
+
+                <div class="col" id="pushedContent">
+                    {% block content %}
+                    {% endblock %}
+                </div>
+            </div>
+        </div>
+
+        <div id="toast" class="fade toast-container position-absolute bottom-0 start-50 translate-middle-x" aria-live="assertive" aria-atomic="true">
+            <div id="toastMessage" class="alert alert-success" role="alert">
+
+            </div>
+        </div>
+        <script src="{{ url_for('static', filename='htmx.min.js') }}"></script>
+        <script src="{{ url_for('static', filename='bootstrap.bundle.min.js') }}"></script>
+        <script src="{{ url_for('static', filename='toast.js') }}"></script>
+
+    </body>
+
+</html>

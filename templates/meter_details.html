@@ -1,0 +1,64 @@
+{% extends 'main.html' %}
+{% block content %}
+
+<br />
+
+<div class="card">
+    <h5 class="card-header">Meter Detials /meter/&lt;int:id&gt;</h5>
+    <div class="card-body">
+
+        <h5 class="card-title">JSON Result</h5>
+        <hr class="border border-dark border-1 opacity-75">
+        <div class="card-text">
+            <pre id="meter_detial_code"></pre>
+        </div>
+
+        <h5 class="card-title">Meter Values</h5>
+        <hr class="border border-dark border-1 opacity-75">
+        <div class="card-text">
+            <form method="PUT" action="/meter/{{meter.id}}/update" autocomplete="off">
+                <div class="input-group mb-3">
+                    <span class="input-group-text" id="basic-addon1">Meter ID</span>
+                    <input type="text" class="form-control" id="meterId" name="id" placeholder="{{meter.id}}" aria-label="Label" aria-describedby="basic-addon1" disabled readonly>
+                </div>
+                <div class="input-group mb-3">
+                    <span class="input-group-text" id="basic-addon1">Meter Label</span>
+                    <input type="text" class="form-control" id="meterLabel" name="label" placeholder="{{meter.label}}" aria-label="Label" aria-describedby="basic-addon1">
+                </div>
+                <button
+                    type="submit"
+                    class="btn btn-primary mb-3"
+                    hx-put="/meter/{{meter.id}}/update"
+                    hx-target="#pushedContent"
+                    hx-confirm="Are you sure you want to update Meter: {{meter.label}} with ID: {{meter.id}}"
+                    hx-transition
+                    hx-push-url="flase">Update Meter /meter/&lt;int:id&gt;/update</button>
+                <button
+                    type="submit"
+                    class="btn btn-danger mb-3"
+                    hx-delete="/meter/{{meter.id}}/delete"
+                    hx-target="#pushedContent"
+                    hx-confirm="Are you sure you want to delete Meter: {{meter.label}} with ID: {{meter.id}}"
+                    hx-transition
+                    hx-push-url="flase">Delete Meter /meter/&lt;int:id&gt;/delete</button>
+            </form>
+        </div>
+
+    </div>
+</div>
+<br />
+<div id="meter_data_partial">
+    {% include 'partials/meter_data.html' %}
+</div>
+
+
+<script type="text/javascript">
+    var data = '{{meter|tojson|safe}}'
+    ;(function(){
+
+        document.getElementById('meter_detial_code').innerHTML = JSON.stringify(JSON.parse(data), null, 4)
+
+    })();
+</script>
+
+{% endblock %}
