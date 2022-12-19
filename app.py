@@ -151,5 +151,5 @@ def create_meter_data(id):
         resp.headers['HX-Push'] = f'/meter/{id}'
         return resp
 
-if __name__ == '__main__':
-    app.run()
+#if __name__ == '__main__':
+#   app.run()
